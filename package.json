@@ -9,6 +9,7 @@
     "start": "electron src/index.js"
   },
   "dependencies": {
-    "electron": "^10.1.0"
+    "electron": "^10.1.0",
+    "electron-reload": "^1.5.0"
   }
 }
