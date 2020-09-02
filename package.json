@@ -18,9 +18,13 @@
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
     "@zeit/next-sass": "^1.0.1",
+    "aws-sdk": "^2.745.0",
     "electron-serve": "^1.0.0",
     "electron-store": "^5.2.0",
-    "sass": "^1.26.10"
+    "expo-sqlite": "^8.2.1",
+    "sass": "^1.26.10",
+    "sqlite": "^4.0.14",
+    "sqlite3": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

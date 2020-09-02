@@ -20,7 +20,8 @@ class Header extends BaseComponent {
 
     handleOnChangeInput = (e) => {
         const readInput = e.target.value;
-        this.setState({ ...this.setState, searchInput: readInput })
+        this.setState({ ...this.setState, searchInput: readInput });
+		  this.redirectTo("/login", "/login")
     }
 
     handleOnSubmit = (e) => {
@@ -33,9 +34,8 @@ class Header extends BaseComponent {
     render() {
         return (
             <header>
-                <h1 className="titulo texto-contraste"> PUNTO DE VENTA </h1>
                 <div className="header-top">
-                    <button type="button" className="btn"> Left </button>
+						 <div></div>
                     <form onSubmit={this.handleOnSubmit}>
                         <input placeholder="Busqueda" type="text" className="input-text" onChange={this.handleOnChangeInput} value={this.state.searchInput} />
                     </form>

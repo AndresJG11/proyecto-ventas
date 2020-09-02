@@ -1,5 +1,5 @@
 import React            from 'react';
-import BasePanel        from '../components/BasePanel';
+import BaseComponent        from '../../components/BaseComponent';
 
 class Login extends BaseComponent
 {
@@ -21,6 +21,7 @@ class Login extends BaseComponent
 	render (){
 		return(
 			<div className="site">
+				Este es el login
 			</div>
 		);
 	}
