@@ -1,11 +1,122 @@
+$contraste: #BF7B6B;
+$principal: #2E5FF2;
+$principal-claro: #276BF2;
+$texto: #3f3844;
+
+*{
+	font-size: 20px;
+}
+
+.texto-contraste{
+	background-color: $contraste;
+	color: white;
+	font-size: 1.5rem;
+}
+
 body{
 	background: white;
 	margin: 0px;
 	padding: 0px;
+	font-family: Roboto, Geneva, Tahoma, sans-serif;
+}
+.titulo{
+	text-align: center;
+	margin: 0px;
+}
+.btn{
+	align-items: center;
+	border-radius: 5px;
+	border: none;
+	color: $texto;
+	cursor: pointer;
+	display: flex;
+	font-weight: bolder;
+	font-size: 0.9rem;
+	outline: none;
+	padding: 5px 15px 5px 15px;
+	.btn-text{	
+		
+	}
+	.btn-image{
+
+	}
+}
+.input-text{
+	border: 3px solid white;
+	border-radius: 6px;
+	color: $texto;
+	outline: none;
+	padding: 4px 2px 4px 10px;
+	width: 400px;
+	transition: all 0.5s ease 0s;
+	&:focus{
+		border: 3px solid $contraste;
+	}
+	&:hover{
+		//transition: 0.5s;
+		border: 3px solid $contraste;
+	}
+	&:active{
+		transition: none;
+		//border: 3px solid $principal-claro;
+	}
 }
 header{
-	background: lightblue;
+	//background: $principal;
+}
+.header-top{
+	background: $principal;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+	//margin-top:10px;
+}
+.header-bottom{
+	margin-top: 10px;
+	display: flex;
+	padding: 10px;
+	justify-content: space-around;
+	background-color: $principal-claro;
 }
 .body-page{
 	min-height: 500px;
+}
+
+.logout-btn { //https://codepen.io/grohit/pen/zYxMOjR
+    color: #2c2c2c;
+    transition: all 0.5s;
+    position: relative;
+    &::after {
+       // content: "\f2f5";
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 400;
+        position: absolute;
+        left: 80%;
+        top: 54%;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+        background: #FA0000;
+        transition: all 0.5s;
+        border-radius: 10px;
+        box-shadow: 0px 6px 15px #0000ff61;
+		color: #ffffff;
+		.btn-text{
+			color: white;
+		}
+		.btn-image{
+			color: white;
+		}
+        &::after {
+            opacity: 1;
+            transition: all 0.5s;
+            color: #ffffff;
+        }
+    }
+
+
 }
