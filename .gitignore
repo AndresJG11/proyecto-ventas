@@ -1,3 +1,6 @@
 node_modules/
 .next
 app/
+package-lock.json
+yarn-error.log
+yarn.log
