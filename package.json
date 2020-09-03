@@ -21,10 +21,10 @@
     "aws-sdk": "^2.745.0",
     "electron-serve": "^1.0.0",
     "electron-store": "^5.2.0",
-    "expo-sqlite": "^8.2.1",
     "sass": "^1.26.10",
     "sqlite": "^4.0.14",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "swr": "0.1.17"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

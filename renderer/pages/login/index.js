@@ -48,8 +48,17 @@ class Login extends BaseComponent {
 		);
 	}
 }
+<<<<<<< HEAD
 Login.getInitialProps = async ({ query }) => {
 
+=======
+Login.getInitialProps = async ({query}) =>
+{
+	  const response = await fetch('http://localhost:8888/api');
+	  const ownersList = await response.json();
+	  console.log(ownersList)
+	  return {ownersList: ownersList}
+>>>>>>> c1271bf3af7163b37c1f8a20e3c8904ac3511063
 }
 
 export default Login;
