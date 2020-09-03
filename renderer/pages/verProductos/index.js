@@ -27,7 +27,7 @@ class index extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { data, searchTable: '' }
+        this.state = { data, searchTable: ''}
 
         this.handleAddProduct = this.handleAddProduct.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -55,7 +55,6 @@ class index extends Component {
     handleOnChange(e) {
         const value = e.target.value;
         this.setState({ searchTable: value });
-        console.log(this.state.searchTable.length)
     }
 
     handleDeleteText(e) {
@@ -63,10 +62,11 @@ class index extends Component {
         this.textInput.current.focus();
     }
 
-    //input-text input-table-search 
-
     render() {
-        const { productos } = this.state.data;
+
+        const searchTable = this.state.searchTable;
+        let { productos } = this.state.data;
+
 
         return (
             <div className="verProductos">
@@ -84,7 +84,7 @@ class index extends Component {
                     <input type="text" className="input-table-search" ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
                 </div>
                 <hr className="style-two" />
-                <Tabla productos={productos} />
+                <Tabla productos={productos}  />
             </div>
         );
     }
