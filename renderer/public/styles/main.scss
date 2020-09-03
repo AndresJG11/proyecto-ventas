@@ -1,4 +1,4 @@
-$contraste: #F1AC2B;
+$contraste: #FA0000;
 $principal: #58AFE0;
 $principal-claro: #276BF2;
 $texto: #3f3844;
@@ -23,66 +23,44 @@ body{
 	text-align: center;
 	margin: 0px;
 }
-.btn{
-	align-items: center;
-	border-radius: 5px;
-	border: none;
-	color: $texto;
-	cursor: pointer;
-	display: flex;
-	font-weight: bolder;
-	font-size: 0.9rem;
-	outline: none;
-	padding: 5px 15px 5px 15px;
-	.btn-text{
-
-	}
-	.btn-image{
-
-	}
-}
-.input-text{
-	border: 3px solid white;
-	border-radius: 6px;
-	color: $texto;
-	outline: none;
-	padding: 4px 2px 4px 10px;
-	width: 400px;
-	transition: all 0.5s ease 0s;
-	&:focus{
-		border: 3px solid $contraste;
-	}
-	&:hover{
-		//transition: 0.5s;
-		border: 3px solid $contraste;
-	}
-	&:active{
-		transition: none;
-		//border: 3px solid $principal-claro;
-	}
-}
-header{
-	//background: $principal;
-}
-.header-top{
-	background: $principal;
-	display: flex;
-	justify-content: space-around;
-	padding: 10px;
-	//margin-top:10px;
-}
-.header-bottom{
-	margin-top: 10px;
-	display: flex;
-	padding: 10px;
-	justify-content: space-around;
-	background-color: $principal-claro;
-}
 .body-page{
 	min-height: 500px;
 }
+.btn{
+	align-items: center;
+	border-radius: 5px;
+	color: $texto;
+	cursor: pointer;
+	border: 1px solid black;
+	//display: flex;
+	display: inline-flex;
+	font-weight: bolder;
+	font-size: 0.9rem;
+	outline: none;
+	padding: 10px 15px 10px 15px;
+	background-color: white;
+	.btn-text{
+		
+	}
+	.btn-image{
+		margin-right: 5px;
+	}
+}
 
-.logout-btn { //https://codepen.io/grohit/pen/zYxMOjR
+.btn-toggle{
+	border: 1px solid black;
+	&:hover{
+		transition: all 0.5s;
+		background-color: #FF7979;
+	}
+}
+
+.toggle-active{
+	background-color: #FF7979;
+}
+
+
+.btn-logout { //https://codepen.io/grohit/pen/zYxMOjR
     color: #2c2c2c;
     transition: all 0.5s;
     position: relative;
@@ -117,6 +95,161 @@ header{
             color: #ffffff;
         }
     }
+}
+
+.btn-add{
+	background-color: #7CFF00;
+	//display: inline-flex;
+	margin-right: 20px;
+	background-position: center;
+	transition: background 0.5s;
+	.btn-image{
+		color: $texto;
+	}
+	&:hover {
+	  background: #3DF333 radial-gradient(circle, transparent 1%, #7CFF00 1%) center/11000%;
+	}
+	&:active {
+	  background-color: #3DF333;
+	  background-size: 100%;
+	  transition: background 0s;
+	}
+}
+
+.btn-refrescar{
+	//background-color: #4FB0E8;
+	background-color: #83D1FF;
+	//display: inline-flex;
+	margin-right: 20px;
+	background-position: center;
+	transition: background 0.5s;
+	.btn-image{
+		color: $texto;
+	}
+	&:hover {
+	  background: #60C4FF radial-gradient(circle, transparent 1%, #83D1FF 1%) center/11000%;
+	}
+	&:active {
+	  background-color: #60C4FF;
+	  background-size: 100%;
+	  transition: background 0s;
+	}
+}
 
 
+.input-text{
+	border: 2px solid white;
+	border-radius: 6px;
+	color: $texto;
+	outline: none;
+	padding: 4px 2px 4px 10px;
+	width: 400px;
+	transition: all 0.5s ease 0s;
+	&:focus{
+		border: 2px solid $contraste;
+	}
+	&:hover{
+		//transition: 0.5s;
+		border: 2px solid $contraste;
+	}
+	&:active{
+		transition: none;
+		//border: 3px solid $principal-claro;
+	}
+}
+
+hr.style-two {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(19, 17, 17, 0.3);
+	width: 97% ;
+}
+
+header{
+	//background: $principal;
+	margin-bottom: 20px;
+}
+.header-top{
+	background: $principal;
+	display: flex;
+	justify-content: space-around;
+	padding: 10px;
+	//margin-top:10px;
+}
+.header-bottom{
+	margin-top: 10px;
+	display: flex;
+	padding: 10px;
+	justify-content: space-around;
+	//background-color: $principal-claro;
+}
+.verProductos{
+	width: 95%;
+	margin: auto;
+}
+.verProductos-tabla{
+	border: 3px solid #ECECEC;
+	width: 90%;
+	margin: auto;
+	border-collapse: collapse;
+
+	thead{
+		background-color: #C8E5FA;
+		text-align: left;
+		tr{
+			th{
+				border: 3px solid #ECECEC;
+				font-size: 1.1rem !important;
+				padding: 5px 0px 5px 5px;
+			}
+		}
+	}
+	tbody{
+		text-align: left;
+		tr td{
+			padding: 5px 0px 5px 10px;
+		}
+		tr:nth-child(odd){
+			background-color: #F9FDFF;
+		}
+		tr:nth-child(odd){
+			background-color: #F2F9FE;
+		}
+	}
+}
+
+.input-icons{
+	display: inline;
+	float: right;
+	position: relative;
+	width: 250px;
+	margin-right: 20px;
+	margin-top: 15px;
+}
+
+.input-icons .mi { 
+	position: absolute;
+	right: 5px ;
+	cursor: pointer;
+} 
+
+.icon { 
+	padding: 4px 2px 4px 10px;
+} 
+
+.input-field { 
+} 
+
+.input-table-search{
+	padding: 4px 2px 4px 10px; 
+	border-radius: 10px;
+	border: 2px solid black;
+	float: right;
+	outline: none;
+	width: 90%;
+}
+
+.invisible{
+	visibility: hidden;
 }
