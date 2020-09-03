@@ -23,7 +23,7 @@ class Header extends BaseComponent {
     handleOnChangeInput = (e) => {
         const readInput = e.target.value;
         this.setState({ ...this.setState, searchInput: readInput });
-        //this.redirectTo("/login", "/login")
+        this.redirectTo("/login", "/login")
     }
 
     handleOnSubmit = (e) => {

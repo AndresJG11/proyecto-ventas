@@ -28,7 +28,10 @@ class Login extends BaseComponent
 }
 Login.getInitialProps = async ({query}) =>
 {
-
+	  const response = await fetch('http://localhost:8888/api');
+	  const ownersList = await response.json();
+	  console.log(ownersList)
+	  return {ownersList: ownersList}
 }
 
 export default Login;
