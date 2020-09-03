@@ -7,16 +7,17 @@ class Tabla extends Component {
         this.state = {productos: props.productos}
     }
 
-    formatDate = (date) => {
+    formatDate = (dateNro) => {
+		 let date = new Date(dateNro);
         return (`${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`)
     }
     handleSort = (e) => {
         const colToSort = e.target.id;
-        
+
     }
     render() {
         return (
-            <>
+            <div>
                 <table className="verProductos-tabla">
                     <thead>
                         <tr>
@@ -37,7 +38,7 @@ class Tabla extends Component {
                         </tr>)}
                     </tbody>
                 </table>
-            </>
+            </div>
         )
     }
 }

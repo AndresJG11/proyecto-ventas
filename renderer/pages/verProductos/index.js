@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Tabla from '../../components/Tabla';
-
+import BaseComponent from '../../components/BaseComponent'
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 import ClearIcon from '@material-ui/icons/Clear';
-
+/*
 const simularProductos = (cantidad = 2) => {
     let productos = [];
     for (let i = 0; i < cantidad; i++) {
@@ -20,14 +20,15 @@ const simularProductos = (cantidad = 2) => {
     return ({ productos })
 }
 
-const data = simularProductos(10);
+const data = simularProductos(10);*/
 
 
-class index extends Component {
+class GetProducts extends BaseComponent {
     constructor(props) {
         super(props);
 
-        this.state = { data, searchTable: ''}
+        this.state = { searchTable: ''}
+		  this.state.productos;
 
         this.handleAddProduct = this.handleAddProduct.bind(this);
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -35,8 +36,19 @@ class index extends Component {
 
         this.textInput = React.createRef();
     }
+
+	 async componentDidMount() {
+	  const response = await fetch('http://localhost:8888/api/products/get');
+	  const productsList = await response.json();
+	  this.setState({
+		  "productos" : productsList
+	  });
+	 }
+
+
+
     handleAddProduct(event) {
-        const { productos } = this.state.data;
+        /*const { productos } = this.state.data;
         const nuevoProducto = {
             id: productos[productos.length - 1]["id"] + 1,
             nombre: 'producto_' + 20,
@@ -45,7 +57,7 @@ class index extends Component {
             barras: 20 * 1002
         }
         productos.push(nuevoProducto)
-        this.setState({ data: { productos } })
+        this.setState({ data: { productos } })*/
     }
 
     handleRefreshTable() {
@@ -65,7 +77,6 @@ class index extends Component {
     render() {
 
         const searchTable = this.state.searchTable;
-        let { productos } = this.state.data;
 
 
         return (
@@ -84,10 +95,18 @@ class index extends Component {
                     <input type="text" className="input-table-search" ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
                 </div>
                 <hr className="style-two" />
-                <Tabla productos={productos}  />
+					 {
+						 (this.state.productos === undefined || this.state.productos === null)?
+						 	<center><h2>Buscando los productos</h2></center>
+						:
+							(this.state.productos.length === 0)?
+							<center><h2>No hay productos</h2></center>
+							:
+	                  <Tabla productos={this.state.productos}  />
+					 }
             </div>
         );
     }
 }
 
-export default index;
+export default GetProducts;
