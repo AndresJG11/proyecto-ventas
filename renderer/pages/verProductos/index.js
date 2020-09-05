@@ -53,8 +53,6 @@ class GetProducts extends BaseComponent {
         });
     }
 
-
-
     handleOpenModal(event) {
         this.setState({ isModalOpen: true })
 
@@ -69,6 +67,24 @@ class GetProducts extends BaseComponent {
         productos.push(nuevoProducto)
         this.setState({ data: { productos } })*/
 
+		return fetch('http://localhost:8888/api/products/get', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				firstParam: 'yourValue',
+				secondParam: 'yourOtherValue',
+			})
+		})
+		.then((response) => response.json())
+		.then((responseJson) => {
+			return responseJson.success;
+		})
+		.catch((error) => {
+			console.error(error);
+		});
     }
 
     handleRefreshTable() {
@@ -145,8 +161,10 @@ class GetProducts extends BaseComponent {
 
                 <div className="input-icons">
                     <ClearIcon className={`mi icon ${this.state.searchTable.length === 0 && 'invisible'} `} onClick={this.handleDeleteText} />
-                    <input type="text" className="input-table-search" ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
+                    <input type="text" className="input-search" placeholder="Buscar en tabla..." ref={this.textInput} onChange={this.handleOnChange} value={this.state.searchTable} />
                 </div>
+					 <br />
+					 <br />
                 <hr className="style-two" />
                 {
                     (this.state.productos === undefined || this.state.productos === null) ?

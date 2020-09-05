@@ -10,16 +10,8 @@ class Header extends BaseComponent {
         super(props);
         this.typeField = "Header";
         this.state = { searchInput: "" }
-        this.handleOnClick = this.handleOnClick.bind(this);
     }
     fromIdButton = 'verVentas';
-
-    handleOnClick = (e) => {
-        e.preventDefault();
-        this.fromIdButton = e.target.id;
-        this.redirectTo(`/${this.fromIdButton}`)
-    }
-
     handleOnChangeInput = (e) => {
         const readInput = e.target.value;
         this.setState({ ...this.setState, searchInput: readInput });
@@ -39,17 +31,8 @@ class Header extends BaseComponent {
                 <div className="header-top">
                     <div></div>
                     <form onSubmit={this.handleOnSubmit}>
-                        <input placeholder="Busqueda" type="text" className="input-text" onChange={this.handleOnChangeInput} value={this.state.searchInput} />
+                        <input placeholder="Busqueda" type="text" className="input-search input-text" onChange={this.handleOnChangeInput} value={this.state.searchInput} />
                     </form>
-                    <button type="button" className="btn btn-logout">
-                        <MeetingRoomIcon className="btn-image" />
-                        Salir
-                    </button>
-                </div>
-                <div className="header-bottom">
-                    <button type="button" className={`btn btn-toggle ${this.fromIdButton==='verProductos'&&'toggle-active'}`} id="verProductos" onClick={this.handleOnClick}> Ver Productos </button>
-                    <button type="button" className={`btn btn-toggle ${this.fromIdButton==='vender'&&'toggle-active'}`} id="vender" onClick={this.handleOnClick}> Vender </button>
-                    <button type="button" className={`btn btn-toggle ${this.fromIdButton==='generarReporte'&&'toggle-active'}`} id="generarReporte" onClick={this.handleOnClick}> Generar Reporte </button>
                 </div>
             </header>
         );

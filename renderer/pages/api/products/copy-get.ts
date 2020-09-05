@@ -11,7 +11,7 @@ export default async function getAllVehicles(req: NextApiRequest, res: NextApiRe
 			res.json([]);
 		}
 		else{
-	      res.json(data);
+			res.json(data);
 		}
 	})
 }
