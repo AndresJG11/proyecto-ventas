@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "@zeit/next-sass": "^1.0.1",
     "aws-sdk": "^2.745.0",
     "electron-serve": "^1.0.0",
