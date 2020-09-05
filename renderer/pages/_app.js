@@ -3,7 +3,7 @@ import App, { Container } from 'next/app';
 import Head from 'next/head';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-
+import LeftPanel from '../components/LeftPanel';
 import '../public/styles/main.scss';
 
 export default class MyApp extends App {
@@ -22,6 +22,12 @@ export default class MyApp extends App {
 	componentDidMount() {
 	}
 
+	handleOnChangeInput = (e) => {
+		 const readInput = e.target.value;
+		 this.setState({ ...this.setState, searchInput: readInput });
+		 this.redirectTo("/login", "/login")
+	}
+
 	render() {
 		const { Component, pageProps } = this.props;
 		return (
@@ -29,11 +35,15 @@ export default class MyApp extends App {
 				<Head>
 					<title>Tienda virtual</title>
 				</Head>
-				<Header />
-				<div className="body-page">
-					<Component {...pageProps} />
+				<div className="page">
+					<div className="left-panel-container">
+						<LeftPanel></LeftPanel>
+					</div>
+					<div className="body-page">
+						<Header />
+						<Component {...pageProps} />
+					</div>
 				</div>
-				<Footer />
 			</div>
 		);
 	}
