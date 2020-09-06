@@ -7,6 +7,13 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import ClearIcon from '@material-ui/icons/Clear';
 
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 /*
 const simularProductos = (cantidad = 2) => {
@@ -43,48 +50,26 @@ class GetProducts extends BaseComponent {
         this.modalNombre = React.createRef();
         this.modalCantidad = React.createRef();
         this.modalCodigo = React.createRef();
+		  this.formularioAdd = React.createRef();
+		  this.getAddProductForm = this.getAddProductForm.bind(this);
+
+		  this.getProducts = this.getProducts.bind(this);
     }
 
     async componentDidMount() {
-        const response = await fetch('http://localhost:8888/api/products/get');
-        const productsList = await response.json();
-        this.setState({
-            "productos": productsList
-        });
+		 await this.getProducts();
     }
+
+	 async getProducts() {
+		const response = await fetch('http://localhost:8888/api/products/get');
+		const productsList = await response.json();
+		this.setState({
+			"productos": productsList
+		});
+	 }
 
     handleOpenModal(event) {
         this.setState({ isModalOpen: true })
-
-        /*const { productos } = this.state.data;
-        const nuevoProducto = {
-            id: productos[productos.length - 1]["id"] + 1,
-            nombre: 'producto_' + 20,
-            cantidad: 20,
-            fecha_edicion: new Date(2020, 9, 10),
-            barras: 20 * 1002
-        }
-        productos.push(nuevoProducto)
-        this.setState({ data: { productos } })*/
-
-		return fetch('http://localhost:8888/api/products/get', {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				firstParam: 'yourValue',
-				secondParam: 'yourOtherValue',
-			})
-		})
-		.then((response) => response.json())
-		.then((responseJson) => {
-			return responseJson.success;
-		})
-		.catch((error) => {
-			console.error(error);
-		});
     }
 
     handleRefreshTable() {
@@ -102,42 +87,43 @@ class GetProducts extends BaseComponent {
     }
 
     handleModalClose() {
-        this.setState({ isModalOpen: false })
+       this.setState({ isModalOpen: false })
     }
 
 
-    getAddProductForm() {
-        const handleAddProduct = (e) => {
-            e.preventDefault();
-            const nombre = this.modalNombre.current.value;
-            const cantidad = this.modalCantidad.current.value;
-            const codigo = this.modalCodigo.current.value;
+    async getAddProductForm() {
+		 let nombre = this.modalNombre.current.value;
+		 let cantidad = this.modalCantidad.current.value;
+		 let codigo = this.modalCodigo.current.value;
 
-            console.log("Agregar", nombre, cantidad, codigo);
 
-            this.setState( {isModalOpen:false} )
-        }
-
-        return (<div className="modal-root">
-            <form onSubmit={handleAddProduct}>
-                <label>
-                    <span> Nombre: </span>
-                    <input type="text" className="modal-input" ref={this.modalNombre}/>
-                </label>
-                <label>
-                     <span> Cantidad: </span>
-                    <input type="number" className="modal-input number" ref={this.modalCantidad} />
-                </label>
-                <label>
-                    <span> Código: </span>
-                    <input type="number" className="modal-input number" ref={this.modalCodigo} />
-                </label>
-                <button className="btn btn-add ripple" type="submit">
-                    <AddBoxIcon className="btn-image" />
-                    <span className="btn-text"> Agregar </span>
-                </button>
-            </form>
-        </div>)
+		 var self = this;
+	  	  await fetch('http://localhost:8888/api/products/add', {
+	  			method: 'POST',
+	  			headers: {
+	  				'Accept': 'application/json',
+	  				'Content-Type': 'application/json',
+	  			},
+	  			body: JSON.stringify({
+	  				nombre: nombre,
+	  				cantidad: cantidad,
+					codigo : codigo
+	  			})
+	  		})
+	  		.then((response) => response.json())
+	  		.then(async function(responseJson) {
+				if(responseJson[0] === true){
+					self.setState( {isModalOpen:false});
+					await self.getProducts();
+				}
+				else{
+					self.setState( {isModalOpen:false});
+					// TODO: NOTIFICAR ERROR
+				}
+	  		})
+	  		.catch((error) => {
+	  			console.error(error);
+	  		});
     }
 
     render() {
@@ -146,10 +132,55 @@ class GetProducts extends BaseComponent {
 
         return (
             <div className="verProductos">
-                <Modal open={isModalOpen}
-                    onClose={this.handleModalClose}>
-                    {this.getAddProductForm()}
-                </Modal>
+
+					<Dialog open={isModalOpen} aria-labelledby="form-dialog-title">
+					  <DialogTitle id="form-dialog-title">Añadir producto</DialogTitle>
+					  <DialogContent>
+								 <TextField
+									inputRef={this.modalNombre}
+									autoFocus
+									margin="dense"
+									id="name"
+									label="Nombre producto"
+									type="text"
+									fullWidth
+									required={true}
+									helperText="Por favor ponga un nombre."
+								 />
+								 <TextField
+									inputRef={this.modalCantidad}
+									autoFocus
+									margin="dense"
+									id="cantidad"
+									label="Cantidad"
+									type="number"
+									fullWidth
+									required={true}
+									helperText="Este valor debe ser numérico."
+								 />
+								 <TextField
+									inputRef={this.modalCodigo}
+									autoFocus
+									margin="dense"
+									id="codigo"
+									label="Código de barras"
+									type="number"
+									fullWidth
+									required={true}
+									helperText="Este valor debe ser numérico."
+								 />
+					  </DialogContent>
+					  <DialogActions>
+						 <Button onClick={this.handleModalClose} color="primary">
+							Cancelar
+						 </Button>
+						 <Button onClick={this.getAddProductForm} color="primary">
+							Agregar
+						 </Button>
+					  </DialogActions>
+					</Dialog>
+
+
                 <button className="btn btn-add ripple" onClick={this.handleOpenModal}>
                     <AddBoxIcon className="btn-image" />
                     <span className="btn-text"> Añadir Producto </span>

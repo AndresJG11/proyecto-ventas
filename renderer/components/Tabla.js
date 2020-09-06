@@ -4,7 +4,6 @@ class Tabla extends Component {
     productos;
     constructor(props) {
         super(props)
-        this.state = {productos: props.productos}
     }
 
     formatDate = (dateNro) => {
@@ -16,6 +15,7 @@ class Tabla extends Component {
 
     }
     render() {
+		 let productos = this.props.productos;
         return (
             <div>
                 <table className="verProductos-tabla">
@@ -29,7 +29,7 @@ class Tabla extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.productos.map((producto) => <tr key={producto["id"]}>
+                        {productos.map((producto) => <tr key={producto["id"]}>
                             <td> {producto["id"]} </td>
                             <td> {producto["nombre"]} </td>
                             <td> {producto["cantidad"]} </td>

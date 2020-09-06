@@ -5,7 +5,6 @@ export default async (req, res) => {
    var data = [];
    db.all("select * from producto", function(err, rows){
  	  data = rows;
-	  console.log(data);
  	  if(rows === undefined){
  		  res.json([]);
  	  }
