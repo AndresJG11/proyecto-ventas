@@ -1,13 +1,13 @@
 import sqlite3 from 'sqlite3'
 
 export default async (req, res) => {
-	let nombre = req["body"]["nombre"];
-	let cantidad = req["body"]["cantidad"];
-	let codigo = req["body"]["codigo"];
+	let idProduct = req["body"]["id"];
 	let db = new sqlite3.Database("./db.sqlite", sqlite3.OPEN_READWRITE);
    var data = [];
-   db.run("INSERT into producto(nombre, cantidad, barras) VALUES ( ? , ? , ?)", [nombre, cantidad, codigo], function(err, rows) {
-			db.close();
+   db.run("UPDATE producto set eliminado=1 where id = ? ", [idProduct], function(err, rows) {
+	console.log(err, rows);
+
+		db.close();
 		if(err === null || err === undefined){
 	   	res.json([true]);
 		}

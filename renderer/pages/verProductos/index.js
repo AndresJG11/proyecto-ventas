@@ -54,6 +54,8 @@ class GetProducts extends BaseComponent {
 		  this.getAddProductForm = this.getAddProductForm.bind(this);
 
 		  this.getProducts = this.getProducts.bind(this);
+
+		  this.deleteFunction = this.deleteFunction.bind(this);
     }
 
     async componentDidMount() {
@@ -114,17 +116,47 @@ class GetProducts extends BaseComponent {
 	  		.then(async function(responseJson) {
 				if(responseJson[0] === true){
 					self.setState( {isModalOpen:false});
+					BaseComponent.alertField.current.open("Producto creado con éxito", "success");
 					await self.getProducts();
 				}
 				else{
 					self.setState( {isModalOpen:false});
-					// TODO: NOTIFICAR ERROR
+					BaseComponent.alertField.current.open("Error al crear el producto", "error");
 				}
 	  		})
 	  		.catch((error) => {
 	  			console.error(error);
 	  		});
     }
+
+	 async deleteFunction(id) {
+		 var self = this;
+	  	  await fetch('http://localhost:8888/api/products/delete', {
+	  			method: 'POST',
+	  			headers: {
+	  				'Accept': 'application/json',
+	  				'Content-Type': 'application/json',
+	  			},
+	  			body: JSON.stringify({
+	  				id: id,
+	  			})
+	  		})
+	  		.then((response) => response.json())
+	  		.then(async function(responseJson) {
+				if(responseJson[0] === true){
+					self.setState( {isModalOpen:false});
+					BaseComponent.alertField.current.open("Producto eliminado con éxito", "success");
+					await self.getProducts();
+				}
+				else{
+					self.setState( {isModalOpen:false});
+					BaseComponent.alertField.current.open("Error al eliminar el producto", "error");
+				}
+	  		})
+	  		.catch((error) => {
+	  			console.error(error);
+	  		});
+	 }
 
     render() {
 
@@ -204,7 +236,7 @@ class GetProducts extends BaseComponent {
                         (this.state.productos.length === 0) ?
                             <center><h2>No hay productos</h2></center>
                             :
-                            <Tabla productos={this.state.productos} />
+                            <Tabla productos={this.state.productos} deleteFunction={this.deleteFunction} />
                 }
             </div>
         );

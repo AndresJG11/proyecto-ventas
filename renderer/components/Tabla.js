@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import DeleteIcon from '@material-ui/icons/Delete';
+import BaseComponent from '../components/BaseComponent'
 
-class Tabla extends Component {
+class Tabla extends BaseComponent {
     productos;
     constructor(props) {
-        super(props)
+        super(props);
+		  this.deleteFunction = this.props.deleteFunction;
     }
 
     formatDate = (dateNro) => {
@@ -14,6 +17,7 @@ class Tabla extends Component {
         const colToSort = e.target.id;
 
     }
+
     render() {
 		 let productos = this.props.productos;
         return (
@@ -26,6 +30,7 @@ class Tabla extends Component {
                             <th> Cantidad </th>
                             <th> Fecha de Edición (dd-mm-aa) </th>
                             <th> Código de barras </th>
+                            <th> Operaciones </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,6 +40,17 @@ class Tabla extends Component {
                             <td> {producto["cantidad"]} </td>
                             <td> {this.formatDate(producto["fecha_edicion"])} </td>
                             <td> {producto["barras"]} </td>
+									 <td>
+										 <button className='delete-cart' tabIndex="0">
+												<div className='icon'>
+													<DeleteIcon />
+												</div>
+												<div className='text'>
+													<span className="first-span">¿Eliminar?</span>
+													<span className="second-span" onClick={(e) => {this.deleteFunction(producto["id"])}}>Click para confirmar</span>
+												</div>
+											</button>
+									 </td>
                         </tr>)}
                     </tbody>
                 </table>

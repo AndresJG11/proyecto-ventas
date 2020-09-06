@@ -243,7 +243,8 @@ header{
 		text-align: left;
 	}
 	td{
-		padding: 5px 10px;
+		padding: 3px 10px;
+		height: 35px;
 	}
 	tr:nth-child(odd){
 		background-color: $principal;
@@ -290,7 +291,7 @@ header{
 	visibility: hidden;
 }
 
-/*  LOGIN    */ 
+/*  LOGIN    */
 
 .login-root{
 	display: flex;
@@ -371,10 +372,10 @@ header{
 	}
 }
 
-input[type="number"]::-webkit-inner-spin-button, 
-	input[type="number"]::-webkit-outer-spin-button { 
-	-webkit-appearance: none; 
-	margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 	}
 /*  vender  */
 
@@ -433,3 +434,106 @@ footer{
 }
 
 /***FOOTER***/
+
+
+$bg: #313841; $red: #F34541; $black: #1D242B; $green: #38B87C; $blue: #2492FF;
+
+.delete-cart{
+	display: flex;
+	cursor: pointer;
+	border: 0;
+	background: transparent;
+	outline: 0;
+	overflow: hidden;
+	position: absolute;
+	margin-top: -15px;
+	.icon {
+		position: relative;
+		background: $contraste;
+		line-height: 30px;
+		width: 30px;
+		height: 30px;
+		text-align: center;
+		color: #fff;
+		font-size: 16px;
+		transition: .2s color;
+		border-radius: 2px;
+		padding: 0px;
+		&:after {
+			content: ' ';
+			display: block;
+			position: absolute;
+			width: 5px;
+			height: 5px;
+			transform: rotate(45deg);
+			background: $contraste;
+			top: 12.5px;
+			right: 1px;
+			transition: .2s right;
+			z-index: 1;
+		}
+	}
+	.text {
+		position: relative;
+		width: 0;
+		height: 30px;
+		overflow: hidden;
+		background: $red;
+		text-align: center;
+		line-height: 30px;
+		color: #fff;
+		font-weight: 300;
+		transition: .2s all;
+		border-top-right-radius: 2px;
+		border-bottom-right-radius: 2px;
+		span {
+			width: 100%;
+			opacity: 0;
+			position: absolute;
+			top: -30px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: .3s all;
+		}
+    .second-span{
+      opacity: 0;
+    }
+	}
+	&:hover {
+		.icon {
+			color: $red;
+			border-radius: 0;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			&:after { right: -2px; }
+		}
+		.text {
+			width: 140px;
+		}
+    .first-span{
+      opacity: 1;
+      top: 0;
+    }
+	}
+  &:focus{
+    .icon {
+			border-radius: 0;
+			border-top-left-radius: 2px;
+			border-bottom-left-radius: 2px;
+			.fa { transform: translateY(-30px); }
+			&:after { right: -2px }
+		}
+		.text {
+			background: $principal;
+				width: 140px;
+      .first-span{
+        display: none;
+      }
+			.second-span {
+        opacity: 1;
+        top: 0;
+      }
+		}
+  }
+
+}

@@ -4,6 +4,9 @@ import Head from 'next/head';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import LeftPanel from '../components/LeftPanel';
+import AlertField from '../components/AlertField';
+import BaseComponent from '../components/BaseComponent';
+
 import '../public/styles/main.scss';
 
 export default class MyApp extends App {
@@ -44,6 +47,8 @@ export default class MyApp extends App {
 						<Component {...pageProps} />
 					</div>
 				</div>
+
+				<AlertField ref={BaseComponent.alertField} />
 			</div>
 		);
 	}
