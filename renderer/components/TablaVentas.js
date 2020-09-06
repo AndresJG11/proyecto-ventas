@@ -58,7 +58,7 @@ class TablaVentas extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td colspan="4" style={{textAlign:'center'}}> Sin Productos </td></tr>
+                    <tr><td colSpan="4" style={{textAlign:'center'}}> Sin Productos </td></tr>
                 </tbody>
             </table>
         }
