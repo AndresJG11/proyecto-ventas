@@ -18,10 +18,24 @@ class index extends Component {
         //this.state = { productos: simularProductos(3).productos, productSelected: {} }
 
         this.handleProductChange = this.handleProductChange.bind(this)
-        this.handleAgregarProducto = this.handleAgregarProducto.bind(this)
+        this.handleAgregarProducto = this.handleAgregarProducto.bind(this);
+
+		  this.getProducts = this.getProducts.bind(this);
 
         this.cantidad = new React.createRef();
     }
+
+	 async componentDidMount() {
+		 await this.getProducts();
+	 }
+
+	 async getProducts() {
+		const response = await fetch('http://localhost:8888/api/products/get');
+		const productsList = await response.json();
+		this.setState({
+			"productos": productsList
+		});
+	 }
 
     handleProductChange(e, productSelected) {
         this.setState({ productSelected });
@@ -58,17 +72,14 @@ class index extends Component {
 
     }
 
-    validar
-
-
     render() {
-        const { productos } = this.state;
+        const { productos, productSelected } = this.state;
         return (
             <div className="vender-root">
                 <div className="vender-buscador">
                     <Autocomplete
                         id="combo-box-demo"
-                        options={dataSimulada.productos}
+                        options={productos}
                         onChange={this.handleProductChange}
                         className="vender-input"
                         clearText="Borrar"
@@ -82,32 +93,17 @@ class index extends Component {
                         </label>
                         <button className="btn btn-add ripple" type="button" onClick={this.handleAgregarProducto}>
                             <AddBoxIcon className="btn-image" />
-                            <span className="btn-text"> Agregar </span>
+                            <span className="btn-text"> Añadir a la lista </span>
                         </button>
                     </div>
                 </div>
                 <div>
-                    <TablaVentas productos={productos} estado={this} />
+                    <TablaVentas productos={productSelected} estado={this} />
                 </div>
             </div>
         )
     }
 }
 
-const simularProductos = (cantidad = 2) => {
-    let productos = [];
-    for (let i = 0; i < cantidad; i++) {
-        productos.push({
-            id: i,
-            nombre: i + '_producto',
-            cantidad: 1,
-            fecha_edicion: new Date(2020, 9, i + 1),
-            barras: i * 1002,
-        })
-    }
-    return ({ productos })
-}
-
-const dataSimulada = simularProductos(10);
 
 export default index;

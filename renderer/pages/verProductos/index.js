@@ -56,6 +56,7 @@ class GetProducts extends BaseComponent {
 		  this.getProducts = this.getProducts.bind(this);
 
 		  this.deleteFunction = this.deleteFunction.bind(this);
+		  this.handleRefreshTable = this.handleRefreshTable.bind(this);
     }
 
     async componentDidMount() {
@@ -74,8 +75,8 @@ class GetProducts extends BaseComponent {
         this.setState({ isModalOpen: true })
     }
 
-    handleRefreshTable() {
-        console.log("Refresh table")
+    async handleRefreshTable() {
+	 	await this.getProducts();
     }
 
     handleOnChange(e) {
