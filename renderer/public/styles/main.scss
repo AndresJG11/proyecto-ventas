@@ -386,17 +386,12 @@ input[type="number"]::-webkit-inner-spin-button,
 }
 
 .vender-buscador{
-	display: flex;
+	display: grid;
 	margin: auto;
-	justify-content: space-between;
-	align-content: center;
-	.vender-input{
-		width: 70%;
-	}
-	.btn{
-		//display: inline;
-		margin: 0px;
-	}
+	grid-template-columns: 40% 20% 31%;
+	width: 100%;
+	align-items: center;
+	grid-column-gap: 3%;
 }
 
 .vender-form{
@@ -537,4 +532,30 @@ $bg: #313841; $red: #F34541; $black: #1D242B; $green: #38B87C; $blue: #2492FF;
 		}
   }
 
+}
+
+
+.text-field-custom {
+	*{
+		color: white !important;
+	}
+	label{
+	}
+	input {
+		border-bottom: 2px solid rgb(0, 0, 0) !important;
+		color: white !important;
+		&:focus{
+			&::after, &:after,&::before, &:before{
+				border-bottom: solid 2px $contraste !important;
+			}
+		}
+	}
+	.MuiInput-underline{
+		&::before, &:before{
+			border-bottom: solid 2px white !important;
+		}
+		&::after, &:after{
+			border-bottom: solid 2px $contraste !important;
+		}
+	}
 }

@@ -144,9 +144,9 @@ class index extends Component {
                         className="vender-input"
                         clearText="Borrar"
                         getOptionLabel={(option) => option.nombre}
-                        renderInput={(params) => <TextField {...params} label="Buscar producto" className="input-search" variant="outlined" />}
+                        renderInput={(params) => <TextField {...params} label="Buscar producto" className="text-field-custom" variant="outlined" />}
                     />
-                    <div className="vender-form">
+                    <div>
 							  <TextField
 								 inputRef={this.cantidad}
 								 autoFocus
@@ -157,8 +157,14 @@ class index extends Component {
 								 fullWidth
 								 defaultValue={1}
 								 required={true}
+								 className="text-field-custom"
 								 helperText="Por favor ponga un número."
+								InputProps={{
+									className: "input",
+								}}
 							  />
+						  </div>
+						  <div>
                         <button className="btn btn-add ripple" type="button" onClick={this.handleAgregarProducto}>
                             <AddBoxIcon className="btn-image" />
                             <span className="btn-text"> Añadir a la lista </span>
@@ -168,6 +174,13 @@ class index extends Component {
                 <div>
                     <TablaVentas productos={allProductsSelected} estado={this} />
                 </div>
+					 <br />
+					 <br />
+					 <br />
+					 <br />
+					 <br />
+					 <br />
+					 <br />
 
 					 <div>
 						 <h3>Datos del comprador</h3>
@@ -180,6 +193,7 @@ class index extends Component {
  						  type="text"
  						  fullWidth
  						  required={true}
+						  className="text-field-custom"
  						  helperText="Por favor ponga un nombre."
  						/>
 						<TextField
@@ -191,6 +205,7 @@ class index extends Component {
 						 type="number"
 						 fullWidth
 						 required={true}
+						 className="text-field-custom"
 						 helperText="Por favor ponga un teléfono."
 					  />
 					  <TextField
@@ -202,6 +217,7 @@ class index extends Component {
 						type="text"
 						fullWidth
 						required={true}
+						className="text-field-custom"
 						helperText="Por favor ponga una dirección."
 					 />
 			 		<button className="btn btn-add ripple" type="button" onClick={this.addVenta}>
