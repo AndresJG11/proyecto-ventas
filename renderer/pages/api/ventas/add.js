@@ -8,11 +8,11 @@ export default async (req, res) => {
 	let db = new sqlite3.Database("./db.sqlite", sqlite3.OPEN_READWRITE);
    var data = [];
    db.run("INSERT into ventas(nombre_comprador, direccion_comprador, telefono_comprador) VALUES ( ? , ? , ?)", [nombre, direccion, telefono], function(err, rows) {
+		console.log(err, rows);
 
 		db.all("select id from ventas ORDER BY id DESC LIMIT 1", function(err, rows){
-			console.log(err, rows);
-	 	  let newID = rows[0]["id"];
 	  		if(err === null || err === undefined){
+		 	  let newID = rows[0]["id"];
 	  			productos.map((producto, index) => {
 	  			   db.run("INSERT into venta_producto(producto_id, venta_id, cantidad) VALUES ( ? , ? , ?)", [producto["id"], newID, producto["added"]], function(err2, rows2) {
 	  				});
