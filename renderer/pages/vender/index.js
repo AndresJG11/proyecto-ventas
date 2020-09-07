@@ -108,10 +108,15 @@ class index extends Component {
   	  		.then(async function(responseJson) {
 				console.log(responseJson);
   				if(responseJson[0] === true){
-  					BaseComponent.alertField.current.open("Venta creado con éxito", "success");
+					self.nombreComprador.current.value = "";
+					self.direccionComprador.current.value = "";
+					self.telefonoComprador.current.value = "";
+					await self.getProducts();
+					self.setState({ allProductsSelected: [], currentSelected: {}});
+  					BaseComponent.alertField.current.open("Venta registrada con éxito", "success");
   				}
   				else{
-  					BaseComponent.alertField.current.open("Error al crear la venta", "error");
+  					BaseComponent.alertField.current.open("Error al registrar la venta", "error");
   				}
   	  		})
   	  		.catch((error) => {
