@@ -19,6 +19,7 @@ body{
 	background: $background;
 	margin: 0px;
 	padding: 0px;
+	color: white;
 	font-family: Roboto, Geneva, Tahoma, sans-serif;
 }
 .titulo{
@@ -34,7 +35,7 @@ body{
 }
 .page{
 	display: grid;
-	grid-template-columns: 1fr 6fr;
+	grid-template-columns: 1.5fr 6fr;
 }
 .btn{
 	align-items: center;
