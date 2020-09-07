@@ -20,7 +20,7 @@ class TablaVentas extends Component {
         let items = [...this.props.productos];
         const indexToDelete = items.indexOf(productToDelete)
         items.splice(indexToDelete, 1)
-        this.props.estado.setState({ productos: items });
+        this.props.estado.setState({ allProductsSelected: items });
     }
 
     render() {
@@ -40,7 +40,7 @@ class TablaVentas extends Component {
                     <tbody>
                         {productos.map((producto) => <tr key={producto["id"]}>
                             <td> {producto["nombre"]} </td>
-                            <td> {producto["cantidad"]} </td>
+                            <td> {producto["added"]} </td>
                             <td> {producto["barras"]} </td>
                             <td> <DeleteIcon onClick={(e) => this.handleDeleteProduct(producto)} style={{ cursor: 'pointer' }} id={producto['id']} /> </td>
                         </tr>)}
