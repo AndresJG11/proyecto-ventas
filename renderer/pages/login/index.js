@@ -27,32 +27,47 @@ class Login extends BaseComponent {
 		this.setState({ showPassword: !this.state.showPassword })
 	}
 
+	registrarse(e){
+		console.log('registro')
+	}
+
+	forgetPassword(e){
+		console.log('recuperar contraseña')
+	}
+
 	render() {
 		return (
-
-			<div class="login-box">
-			  <h2>Iniciar sesión</h2>
-			  <form>
-			    <div class="user-box">
-			      <input type="text" name="" ref={this.email_login} required="" />
-			      <label>Usuario</label>
-			    </div>
-	   		 <div className="user-box">
-	   			 {this.state.showPassword ?
-	   				 <VisibilityIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} /> :
-	   				 <VisibilityOffIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} />
-	   			 }
-	   			 <input type={this.state.showPassword ? 'text' : 'password'} ref={this.password_login} />
- 			      <label>Contraseña</label>
-	   		 </div>
-			    <a href="#">
-			      <span></span>
-			      <span></span>
-			      <span></span>
-			      <span></span>
-			      Iniciar sesión
-			    </a>
-			  </form>
+			<div className="wrapper">
+				<div className="container">
+					<div className="col-left">
+						<div className="login-text">
+							<h2>Bienvenido</h2>
+							<p>Crea una cuenta</p>
+							<a className="btn-login" onClick={this.registrarse} style={{cursor:'pointer'}}>Registrarse</a>
+						</div>
+					</div>
+					<div className="col-right">
+						<div className="login-form">
+							<h2>Entrar</h2>
+							<form onSubmit={this.onClickLogin}>
+								<p>
+									<label>Usuario<span>*</span></label>
+									<input type="text" placeholder="Usuario" required ref={this.email_login} />
+								</p>
+								<p>
+									<label>Contraseña<span>*</span></label>
+									<input type="password" placeholder="Contraseña" required ref={this.password_login}/>
+								</p>
+								<p>
+									<input type="submit" value="Entrar" />
+								</p>
+								<p>
+									<a onClick={this.forgetPassword} style={{cursor:'pointer'}}>Olvidé mi contraseña</a>
+								</p>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -71,20 +86,20 @@ export default Login;
 
 
  <div className="login-root">
-	 <form onSubmit={this.onClickLogin}>
-		 <div className="login-input-icon">
-			 <EmailIcon className={`input-icon`} />
-			 <input type="text" className="input-login" ref={this.email_login} placeholder="Usuario" />
-		 </div>
-		 <div className="login-input-icon">
-			 {this.state.showPassword ?
-				 <VisibilityIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} /> :
-				 <VisibilityOffIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} />
-			 }
-			 <input type={this.state.showPassword ? 'text' : 'password'} className="input-login" placeholder="Contraseña" ref={this.password_login} />
-		 </div>
-		 <button type="submit" className="btn btn-login"> Ingresar </button>
-	 </form>
- </div>
+							<form onSubmit={this.onClickLogin}>
+								<div className="login-input-icon">
+									<EmailIcon className={`input-icon`} />
+									<input type="text" className="input-login" ref={this.email_login} placeholder="Usuario" />
+								</div>
+								<div className="login-input-icon">
+									{this.state.showPassword ?
+										<VisibilityIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} /> :
+										<VisibilityOffIcon className={`input-icon icon-password`} onClick={this.handleShowPassword} />
+									}
+									<input type={this.state.showPassword ? 'text' : 'password'} className="input-login" placeholder="Contraseña" ref={this.password_login} />
+								</div>
+								<button type="submit" className="btn btn-login"> Ingresar </button>
+							</form>
+						</div>
 
 */
