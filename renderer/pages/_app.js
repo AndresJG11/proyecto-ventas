@@ -38,14 +38,24 @@ export default class MyApp extends App {
 				<Head>
 					<title>Tienda virtual</title>
 				</Head>
-				<div className="page">
-					<div className="left-panel-container">
-						<LeftPanel></LeftPanel>
-					</div>
-					<div className="body-page">
-						<Header />
+				<div>
+					aaaa{BaseComponent.isLogged}
+					{
+						(BaseComponent.isLogged)?
+						<div className="page">
+							<div className="left-panel-container">
+								<LeftPanel></LeftPanel>
+							</div>
+							<div className="body-page">
+								<Header />
+								<Component {...pageProps} />
+							</div>
+						</div>
+					:
+					<div>
 						<Component {...pageProps} />
 					</div>
+					}
 				</div>
 
 				<AlertField ref={BaseComponent.alertField} />

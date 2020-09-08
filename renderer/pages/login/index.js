@@ -8,6 +8,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 class Login extends BaseComponent {
 	constructor(props) {
 		super(props);
+
 		this.password_login = new React.createRef();
 		this.email_login = new React.createRef();
 		this.showPassword = new React.createRef();
@@ -17,10 +18,39 @@ class Login extends BaseComponent {
 	}
 
 
-	onClickLogin(e) {
+	async onClickLogin(e) {
 		e.preventDefault()
-		console.log(this.email_login.current.value);
-		console.log(this.password_login.current.value);
+		let username = this.email_login.current.value;
+		let pass = this.password_login.current.value;
+		var self = this;
+		await fetch('http://localhost:8888/api/login/login', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				"username" : username,
+				"pass" : pass
+			})
+		})
+		.then((response) => response.json())
+		.then(async function(responseJson) {
+			console.log(responseJson);
+			if(responseJson[0] !== false){
+				self.email_login.current.value = "";
+				self.password_login.current.value = "";
+				BaseComponent.alertField.current.open("Usuario registrado con éxito", "success");
+				self.login(responseJson[0]);
+				self.redirectTo("/home", "/home");
+			}
+			else{
+				BaseComponent.alertField.current.open("Fallo al iniciar sesión", "error");
+			}
+		})
+		.catch((error) => {
+			console.error(error);
+		});
 	}
 
 	handleShowPassword(e) {
@@ -42,8 +72,7 @@ class Login extends BaseComponent {
 					<div className="col-left">
 						<div className="login-text">
 							<h2>Bienvenido</h2>
-							<p>Crea una cuenta</p>
-							<a className="btn-login" onClick={this.registrarse} style={{cursor:'pointer'}}>Registrarse</a>
+							<p>Inicia sesión para empezar <br />a trabajar</p>
 						</div>
 					</div>
 					<div className="col-right">
@@ -51,7 +80,7 @@ class Login extends BaseComponent {
 							<h2>Entrar</h2>
 							<form onSubmit={this.onClickLogin}>
 								<p>
-									<label>Usuario<span>*</span></label>
+									<label>Nombre de usuario<span>*</span></label>
 									<input type="text" placeholder="Usuario" required ref={this.email_login} />
 								</p>
 								<p>
@@ -59,10 +88,10 @@ class Login extends BaseComponent {
 									<input type="password" placeholder="Contraseña" required ref={this.password_login}/>
 								</p>
 								<p>
-									<input type="submit" value="Entrar" />
+									<br />
 								</p>
 								<p>
-									<a onClick={this.forgetPassword} style={{cursor:'pointer'}}>Olvidé mi contraseña</a>
+									<input type="submit" value="Entrar" />
 								</p>
 							</form>
 						</div>

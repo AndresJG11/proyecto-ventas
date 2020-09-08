@@ -106,7 +106,7 @@ class index extends Component {
                 <button className="btn" onClick={this.handleGenerarReporte} > Generar Reporte </button>
 
                 <div className="generarReporte-pdf">
-                    {dataReporte.length > 0 && <ReportePDF dataReporte={dataReporte} /> }
+                    {dataReporte.length > 0 && <ReportePDF key={Math.random()} dataReporte={dataReporte} /> }
                 </div>
             </div>
         )
