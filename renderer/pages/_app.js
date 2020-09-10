@@ -8,19 +8,20 @@ import AlertField from '../components/AlertField';
 import BaseComponent from '../components/BaseComponent';
 
 import '../public/styles/main.scss';
+import '../public/styles/prueba.css';
 
 export default class MyApp extends App {
 	constructor(props) {
 		super(props);
 	}
 
-	static async getInitialProps({ Component, router, ctx }) {
+	/*static async getInitialProps({ Component, router, ctx }) {
 		let pageProps = {};
 		if (Component.getInitialProps) {
 			pageProps = await Component.getInitialProps(ctx);
 		}
 		return { pageProps };
-	}
+	}*/
 
 	componentDidMount() {
 	}
@@ -39,7 +40,7 @@ export default class MyApp extends App {
 					<title>Tienda virtual</title>
 				</Head>
 				<div>
-					aaaa{BaseComponent.isLogged}
+					aaaa{` ${BaseComponent.isLogged}`}
 					{
 						(BaseComponent.isLogged)?
 						<div className="page">

@@ -1,11 +1,11 @@
 import {Component} from 'react';
 import React from 'react';
 //import DataBaseHandler from '../utils/database'
-import router       from 'next/router';
+import Router       from 'next/router';
 
 class BaseComponent extends Component{
 	static alertField = new React.createRef();
-	static isLogged = false;
+	static isLogged = true;
 	static dataLogged = {};
 	constructor(props){
 		super(props);
@@ -40,7 +40,7 @@ class BaseComponent extends Component{
 	}
 
 	redirectTo(to, alias){
-		router.push(to, alias);
+		Router.push(to, alias);
 	}
 }
 
